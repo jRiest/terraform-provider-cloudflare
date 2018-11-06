@@ -11,6 +11,22 @@ import (
 )
 
 func resourceCloudflareWorkerKvNamespace() *schema.Resource {
+  return &schema.Resource{
+    Create: resourceCloudflareWorkerKvNamespaceCreate,
+    Read: resourceCloudflareWorkerKvNamespaceRead,
+    Update: resourceCloudflareWorkerKvNamespaceUpdate,
+    Delete: resourceCloudflareWorkerKvNamespaceDelete,
+    Importer: &schema.ResourceImporter{
+      State: resourceCloudflareWorkerKvNamespaceImport,
+    }
+    Schema: map[string]*schema.Schema{
+      "title": {
+        Type: schema.TypeString,
+        Required: true,
+        Description: "The title used to help you identify a worker kv namespace."
+      }
+    }
+  }
 }
 
 func resourceCloudflareWorkerKvNamespaceCreate(d *schema.ResourceData, meta interface{}) error {
